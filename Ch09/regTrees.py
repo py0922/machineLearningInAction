@@ -15,8 +15,8 @@ def loadDataSet(fileName):      #general function to parse tab -delimited floats
     return dataMat
 
 def binSplitDataSet(dataSet, feature, value):
-    mat0 = dataSet[nonzero(dataSet[:,feature] > value)[0],:][0]
-    mat1 = dataSet[nonzero(dataSet[:,feature] <= value)[0],:][0]
+    mat0 = dataSet[nonzero(dataSet[:,feature] > value)[0],:]
+    mat1 = dataSet[nonzero(dataSet[:,feature] <= value)[0],:]
     return mat0,mat1
 
 def regLeaf(dataSet):#returns the value used for each leaf
@@ -134,3 +134,11 @@ def createForeCast(tree, testData, modelEval=regTreeEval):
     for i in range(m):
         yHat[i,0] = treeForeCast(tree, mat(testData[i]), modelEval)
     return yHat
+
+
+
+if __name__=='__main__':
+    testMat=mat(eye(4))
+    mat0,mat1=binSplitDataSet(testMat,1,0.5)
+    print(mat0)
+    print(mat1)

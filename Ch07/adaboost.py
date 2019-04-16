@@ -123,3 +123,23 @@ def plotROC(predStrengths, classLabels):
     ax.axis([0,1,0,1])
     plt.show()
     print "the Area Under the Curve is: ",ySum*xStep
+    
+    
+if __name__=='__main__':
+    dataMat,labelMat=loadDataSet('horseColicTraining2.txt')
+    classifyArr,aggClassEst=adaBoostTrainDS(dataMat,labelMat)
+    
+    testData,testLabel=loadDataSet('horseColicTest2.txt')
+    m=shape(testData)[0]
+    predict=adaClassify(testData,classifyArr)
+    errors = multiply(sign(predict) != mat(testLabel).T,ones((m,1)))
+    errorRate=errors.sum()/m
+    print(errorRate)
+    
+    
+     
+    
+    
+    
+    
+
